@@ -131,7 +131,6 @@ def logout(request):
 
 def upload_photo(request):
     request.FILES.appendlist()
-
     return redirect(request.META['HTTP_REFERER'])
 
 
