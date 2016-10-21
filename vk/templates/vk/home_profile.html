@@ -1,0 +1,20 @@
+{%extends 'vk/login_profile.html'%}
+
+{% block menu %}
+    {%include 'vk/user_menu.html' with status="login" parent="home" only%}
+{% endblock %}
+
+{% block under_avatar %}
+<div class= "inputform">
+    <form enctype="multipart/form-data" class = "form-control" method="post" action="/upload_photo/">
+        <div class = "form-group">
+            <br>
+            <h3>Изменить фотографию профиля:</h3>
+            <input type="file" class="colorbutton pull-left" color="yellow" name="image" />
+            <br>
+            <br>
+            <input type="submit" class = "btn btn-success pull-left" value="Загрузить" />
+        </div>
+</form>
+</div>
+{%endblock %}

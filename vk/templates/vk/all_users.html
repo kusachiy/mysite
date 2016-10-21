@@ -1,0 +1,7 @@
+{%extends 'vk/base_extended.html'%}
+<!DOCTYPE html>
+<html lang="en">
+{% block menu %}
+    {%include 'vk/user_menu.html' with status=current_status parent="allusers" only%}
+{%endblock%}
+

@@ -1,0 +1,22 @@
+{% load staticfiles %}
+    <div class="row-fluid">
+        <div class = "longtext">
+            <h5><b>{{post_info.author_name}}</b></h5>
+        </div>
+        {% if post_info.author_id == user_id or user_id == post_info.wall_id%}
+            <div class="pull-right">
+                {% url 'delete_post' p_id=post_info.id as this_url %}
+                <a href="{{this_url}}"><i class="glyphicon glyphicon-remove"></i></a>
+            </div>
+        {% endif %}
+
+    </div>
+    {% url 'profile_with_id' p_id=post_info.author_id as the_url %}
+    <a class="pull-left ava_mini " href= "{{the_url}}">
+        <img class="media-object img-responsive" src="{% static post_info.author_foto %}" alt="Фотография профиля">
+    </a>
+    <div class = "well">
+        {{ post_info.body }}
+        <br>
+        {{ post_info.timestamp }}
+    </div>

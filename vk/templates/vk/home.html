@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% extends 'vk/base.html' %}
+{% load staticfiles %}
+
+{% block title%}
+HomePage
+{% endblock %}
+
+{%block styles%}
+    <link href="{%static 'css/style_homepage.css'%}" rel="stylesheet">
+    <style>
+    body
+	{
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+		background-image: url({%static 'images\main_background.jpg'%});
+		background-color: @myhbc;
+	}</style>
+{%endblock%}
+
+{% block global%}
+<body>
+    <div class="big-container">
+        <div class="row - fluid">
+            <aside class="login-sidebar col-md-6">
+                 <form role="form text-center" action = "/login/" method = "post">
+                      {% csrf_token  %}
+                     <div class="form-group ">
+                          <label for="email">Email</label>
+                          <input type="email" class="form-control " id="email" name="login" placeholder="Email">
+                     </div>
+                     <div class="form-group">
+                          <label for="pass">Password</label>
+                          <input type="password" class="form-control" id="password" name = "password" placeholder="Password">
+                     </div>
+                     <div class="checkbox">
+                        <label><input type="checkbox" name = "check"> Remember Me</label>
+                     </div>
+
+
+                    <button type="submit" class="btn btn-success col-md-6">Log In</button>
+                    <button  type="button" class="btn colorbutton" onclick="javascript:window.location='/register/'"/>Registration</button>
+                    <button  type="button" class="btn orangebutton" onclick="javascript:window.location='/guest/'"/>Guest Mode</button>
+                </form>
+            </aside>
+
+            <section class="content col-md-18">
+                <div class="jumbotron jumbotron-fluid text-center">
+                        <h1 class="display-3">Welcome!!!</h1>
+                        <p class="lead">This is my first work on the layout of the site. Do not judge strictly...</p>
+                        <h3><a href="/register/">Sign Up-----></a></h3>
+
+                </div>
+            </section>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer%}
+<h1>Footer</h1>
+{% endblock %}
+

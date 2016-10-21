@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+{%extends 'vk/base.html'%}
+{% load staticfiles %}
+{% block global %}
+    <div class="row - fluid global">
+            <div class="col-md-6 pull-left">{% block menu %}{% endblock %} </div>
+            <div class="col-md-18 pull-right">{% block content%}{% endblock %}</div>
+    </div>
+{% endblock %}

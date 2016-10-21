@@ -1,0 +1,25 @@
+{%extends 'vk/base_extended.html'%}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+    {% block menu %}
+        {%include 'vk/user_menu.html' with status=current_status parent=mode only%}
+    {%endblock%}
+    {% block content %}
+        <div class="wrapper container" >
+            <ul class="media-list">
+            {% for u in users %}
+                <li class="media">
+                    {% url 'profile_with_id' p_id=u.id as the_url %}
+                    <a class= "pull-left ava_mini"  href= "{{ the_url }}">
+                        <img class= "media-object img-responsive" src = "{% static u.foto %}" alt = "Фотография профиля">
+                    </a>
+                    <div class="media-body">
+                        <h1>{{ u.last_name }} {{ u.first_name }} </h1>
+                    </div>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+	{% endblock %}
+</html>

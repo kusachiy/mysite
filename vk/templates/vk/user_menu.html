@@ -1,0 +1,37 @@
+
+<div class="left-sidebar">
+				<nav class="nav-sidebar">
+					<ul class="nav nav-pills nav-stacked">
+						<!--<li class = "active"><a href = "profile.php?id=', $user_id,'">Home</a></li>-->
+
+                        {% if status == 'login'%}
+                            {% if parent == 'home'%}
+                                <li class = "active"><a href = "/profile/">Home</a></li>
+                            {% else%}
+                                <li><a href = "/profile/">Home</a></li>
+                            {% endif %}
+
+                            {% if parent == 'news'%}
+                                <li class = "active"><a href = "/news/">News</a></li>
+                            {% else%}
+                                <li><a href = "/news/">News</a></li>
+                            {% endif %}
+
+                            {% if parent == 'friends'%}
+                                <li class = "active"><a href = "/friends/">Friends</a></li>
+                            {% else%}
+                                <li><a href = "/friends/">Friends</a></li>
+                            {% endif %}
+                        {% endif %}
+						{% if parent == 'allusers'%}
+                                <li class = "active"><a href = "/allusers/">All Users</a></li>
+                            {% else%}
+                                <li><a href = "/allusers/">All Users</a></li>
+                            {% endif %}
+                        {% if status == 'login'%}
+                            <li class="nav-divider"></li>
+						    <li><a href="/logout/"><i class="glyphicon glyphicon-off"></i> Exit</a></li>
+                        {% endif %}
+					</ul>
+                </nav>
+</div>

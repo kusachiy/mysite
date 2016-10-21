@@ -1,0 +1,5 @@
+{%extends 'vk/login_profile.html'%}
+
+{% block menu %}
+    {%include 'vk/user_menu.html' with status="login" parent="other" only%}
+{%endblock%}

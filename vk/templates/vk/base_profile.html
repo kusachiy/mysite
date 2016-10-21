@@ -1,0 +1,45 @@
+<!doctype HTML>
+{%extends 'vk/base_extended.html'%}
+{% load staticfiles%}
+
+
+{% block menu %}
+    {%include 'vk/user_menu.html'%}
+{%endblock%}
+
+{% block content %}
+<div class = "wrapper">
+    <div class="row-fluid">
+        <section class = "col-md-10">
+            <div class = "avatar_panel">
+                <div class = "avatar center-block">
+                    {% block avatar %}
+                        <img class= "media-object img-responsive" src = "{% static profile_info.foto %}" alt = "Фотография профиля">
+                    {% endblock %}
+                </div>
+            </div>
+            {%block under_avatar %}
+                 <h3>Under_Avatar</h3>
+            {%endblock %}
+        </section>
+        <section class = "col-md-14">
+            <form class = "infopanel">
+                {% block profile_info %}
+                <h1 align="center">{{ profile_info.last_name}} {{ profile_info.first_name}}</h1>
+                {% endblock %}
+            </form>
+            {% block wall %}
+                <ul class="list-group">
+                    {% for p in posts %}
+                        <div class="post">
+                            {%include 'vk/post.html' with post_info=p user_id=user_id only%}
+                        </div>
+                    {% endfor %}
+                </ul>
+            {% endblock %}
+        </section>
+    </div>
+</div>
+{% endblock%}
+{% block footer %}
+{%endblock%}
