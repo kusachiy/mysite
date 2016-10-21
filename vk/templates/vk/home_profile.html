@@ -7,6 +7,7 @@
 {% block under_avatar %}
 <div class= "inputform">
     <form enctype="multipart/form-data" class = "form-control" method="post" action="/upload_photo/">
+        {% csrf_token %}
         <div class = "form-group">
             <br>
             <h3>Изменить фотографию профиля:</h3>
