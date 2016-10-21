@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^profile/$', myprofile, name='myprofile'),
     url(r'^profile/id(?P<p_id>\d+)/$', profile, name='profile_with_id'),
     url(r'^register/$', register, name='register'),
+    url(r'^upload_photo/$', upload_photo, name='upload_photo'),
     url(r'^query_registration/$', query_registration, name='query_registration'),
 ]
 

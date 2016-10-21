@@ -129,6 +129,12 @@ def logout(request):
     return redirect('/home/')
 
 
+def upload_photo(request):
+    request.FILES.appendlist()
+
+    return redirect(request.META['HTTP_REFERER'])
+
+
 def getrelationship(first, second):
     array = Friends.objects.filter(user1_id=first, user2_id=second)
     if array:
