@@ -13,7 +13,7 @@
     </div>
     {% url 'profile_with_id' p_id=post_info.author.id as the_url %}
     <a class="pull-left ava_mini " href= "{{the_url}}">
-        {% if profile_info.author.avatar %}
+        {% if post_info.author.avatar %}
             <img class= "media-object img-responsive" src = "{{ post_info.author.avatar }}" alt = "Фотография профиля">
         {% else %}
             <img class= "media-object img-responsive" src = "{%static 'images\no_avatar.jpg'%}" alt = "Фотография профиля">
