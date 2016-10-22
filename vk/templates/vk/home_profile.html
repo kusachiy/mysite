@@ -26,8 +26,10 @@
     <div>
         <form enctype="multipart/form-data" class = "form-control" method="post" action="/upload_photo/">
             {% csrf_token %}
-                <input type="file" class="colorbutton pull-left" color="yellow" name="image" />
-                <input type="submit" value="Загрузить" />
+                 <p>
+                    <input id="id_image" type="file" class="" name="image">
+                </p>
+                <input type="submit" value="Submit" />
         </form>
     </div>
 {%endblock %}
