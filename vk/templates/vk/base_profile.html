@@ -14,7 +14,7 @@
             <div class = "avatar_panel">
                 <div class = "avatar center-block">
                     {% block avatar %}
-                        <img class= "media-object img-responsive" src = "{% static profile_info.foto %}" alt = "Фотография профиля">
+                        <img class= "media-object img-responsive" src = "{{ profile_info.avatar.url }}" alt = "Фотография профиля">
                     {% endblock %}
                 </div>
             </div>

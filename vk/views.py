@@ -2,6 +2,8 @@ from django.core.handlers.wsgi import WSGIRequest
 from django.http import Http404
 from django.http import HttpRequest
 from django.shortcuts import render, render_to_response, redirect
+
+from vk.forms import UploadPhotoForm
 from vk.models import Person, Friends, Post
 
 
@@ -130,7 +132,13 @@ def logout(request):
 
 
 def upload_photo(request):
-    request.FILES.appendlist()
+
+    if request.method == "POST":
+        MyProfileForm = UploadPhotoForm(request.POST, request.FILES)
+        if MyProfileForm.is_valid():
+            person = getprofileinfo(request.session['id'])
+            person.avatar = MyProfileForm.cleaned_data["picture"]
+            person.save()
     return redirect(request.META['HTTP_REFERER'])
 
 

@@ -20,7 +20,7 @@ class Person(models.Model):
     email = models.EmailField(max_length=30, unique=True)
     password = models.CharField(max_length=30)
     birthday = models.DateField()
-    foto = models.URLField(default='/static/images/no_avatar.jpg')
+    avatar = models.ImageField(default='/media/images/no_avatar.jpg', upload_to='images')
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
