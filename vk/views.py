@@ -132,6 +132,8 @@ def upload_photo(request):
         form = UploadPhotoForm(request.POST, request.FILES)
         if form.is_valid():
             person = getprofileinfo(request.session['id'])
+            if person.avatar:
+                person.avatar.delete(save=False)
             person.avatar = form.cleaned_data["avatar"]
             person.save()
         else:
