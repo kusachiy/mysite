@@ -92,8 +92,7 @@ def query_registration(request):
 
 
 def insertpost(request, w_id):
-    a = request.session['id']
-
+    a = getprofileinfo(request.session['id'])
     p = Post(
         wall_id=w_id,
         author=a,
