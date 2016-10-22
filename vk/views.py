@@ -92,13 +92,13 @@ def query_registration(request):
 
 
 def insertpost(request, w_id):
-    author_info = getprofileinfo(request.session['id'])
-    p = Post(wall_id=w_id,
-             author_id=request.session['id'],
-             author_name=author_info.first_name + ' ' + author_info.last_name,
-             author_foto=author_info.avatar,
-             body=request.POST['textbox'],
-             )
+    a = request.session['id']
+
+    p = Post(
+        wall_id=w_id,
+        author=a,
+        body=request.POST['textbox'])
+
     p.save()
     return redirect(request.META['HTTP_REFERER'])
 

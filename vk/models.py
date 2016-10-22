@@ -5,10 +5,8 @@ from django.contrib.auth.models import User
 class Post(models.Model):
     id = models.AutoField(primary_key=True)
     wall_id = models.IntegerField()
-    author_id = models.IntegerField()
-    author_name = models.CharField(max_length=40)
-    author_foto = models.URLField()
     body = models.TextField()
+    author = models.ForeignKey(Person)
     timestamp = models.DateTimeField(auto_now_add=True)
 
 
