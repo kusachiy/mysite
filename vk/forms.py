@@ -1,4 +1,4 @@
-from django import forms
+from django.forms import forms
 
 
 class UploadPhotoForm(forms.Form):
