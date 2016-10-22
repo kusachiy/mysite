@@ -136,7 +136,7 @@ def upload_photo(request):
             person.avatar = form.cleaned_data["avatar"]
             person.save()
         else:
-            return render_to_response('vk/notification.html', {'hdr': 'Беда', 'message': ''})
+            return render_to_response('vk/notification.html', {'hdr': request.POST, 'message': request.FILES})
     return redirect(request.META['HTTP_REFERER'])
 
 
