@@ -1,6 +1,4 @@
-from django.core.handlers.wsgi import WSGIRequest
 from django.http import Http404
-from django.http import HttpRequest
 from django.shortcuts import render, render_to_response, redirect
 
 from vk.forms import UploadPhotoForm
@@ -99,7 +97,7 @@ def insertpost(request, w_id):
     p = Post(wall_id=w_id,
              author_id=request.session['id'],
              author_name=author_info.first_name + ' ' + author_info.last_name,
-             author_foto=author_info.foto,
+             author_foto=author_info.avatar,
              body=request.POST['textbox'],
              )
     p.save()
@@ -137,8 +135,10 @@ def upload_photo(request):
         MyProfileForm = UploadPhotoForm(request.POST, request.FILES)
         if MyProfileForm.is_valid():
             person = getprofileinfo(request.session['id'])
-            person.avatar = MyProfileForm.cleaned_data["picture"]
+            person.avatar = MyProfileForm.cleaned_data["avatar"]
             person.save()
+        else:
+            return render_to_response('vk/notification.html', {'hdr': MyProfileForm.errors, 'message': ''})
     return redirect(request.META['HTTP_REFERER'])
 
 
