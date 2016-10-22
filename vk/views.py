@@ -132,13 +132,13 @@ def logout(request):
 def upload_photo(request):
 
     if request.method == "POST":
-        MyProfileForm = UploadPhotoForm(request.POST, request.FILES)
-        if MyProfileForm.is_valid():
+        form = UploadPhotoForm(request.POST, request.FILES)
+        if form.is_valid():
             person = getprofileinfo(request.session['id'])
-            person.avatar = MyProfileForm.cleaned_data["avatar"]
+            person.avatar = form.cleaned_data["avatar"]
             person.save()
         else:
-            return render_to_response('vk/notification.html', {'hdr': MyProfileForm.errors, 'message': ''})
+            return render_to_response('vk/notification.html', {'hdr': 'Беда', 'message': ''})
     return redirect(request.META['HTTP_REFERER'])
 
 
