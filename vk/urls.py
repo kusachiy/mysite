@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^login/$', login, name='login'),
     url(r'^logout/$', logout, name='logout'),
     url(r'^notification/(?P<header>\d+)/$', notification, name='notification'),
+    url(r'^news/$', news, name='news'),
     url(r'^profile/$', myprofile, name='myprofile'),
     url(r'^profile/id(?P<p_id>\d+)/$', profile, name='profile_with_id'),
     url(r'^register/$', register, name='register'),

@@ -38,6 +38,11 @@ def home(request):
     return render(request, 'vk/home.html')
 
 
+def news(request):
+    posts = getposts(request.session['id'])
+    return render_to_response('vk/news.html', {'posts': posts})
+
+
 def register(request):
     return render(request, 'vk/register.html')
 
