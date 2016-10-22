@@ -8,11 +8,11 @@
     <div class ="wall panel panel-default">
             <div class="panel-heading"><h2>Стена</h2></div>
             <br>
-            <br>
             {% url 'insertpost' w_id=profile_info.id as the_url %}
             <form class = "" action="{{ the_url }}" method = "post">
                 {% csrf_token %}
                 <textarea class="form-control post" rows="2"  name="textbox" placeholder="Напишите что нибудь на стене..."></textarea>
+                <br>
                 <button type="submit"  class="btn form-control colorbutton pull-right" >Отправить</button>
                 <br>
                 <br>
