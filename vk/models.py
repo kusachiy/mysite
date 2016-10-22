@@ -9,7 +9,7 @@ class Person(models.Model):
     email = models.EmailField(max_length=30, unique=True)
     password = models.CharField(max_length=30)
     birthday = models.DateField()
-    avatar = models.ImageField(default='/media/images/no_avatar.jpg', upload_to='images/')
+    avatar = models.ImageField(upload_to='images/')
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name

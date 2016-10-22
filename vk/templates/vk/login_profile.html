@@ -11,7 +11,7 @@
             {% url 'insertpost' w_id=profile_info.id as the_url %}
             <form class = "" action="{{ the_url }}" method = "post">
                 {% csrf_token %}
-                <textarea class="form-control post" rows="2"  name="textbox" placeholder="Напишите что нибудь на стене..."></textarea>
+                <textarea class="form-control post" rows="3"  name="textbox" placeholder="Напишите что нибудь на стене..."></textarea>
                 <br>
                 <button type="submit"  class="btn form-control colorbutton pull-right" >Отправить</button>
                 <br>
