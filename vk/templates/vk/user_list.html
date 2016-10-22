@@ -12,7 +12,11 @@
                 <li class="media">
                     {% url 'profile_with_id' p_id=u.id as the_url %}
                     <a class= "pull-left ava_mini"  href= "{{ the_url }}">
-                        <img class= "media-object img-responsive" src = "{% static u.foto %}" alt = "Фотография профиля">
+                        {% if u.avatar %}
+                            <img class= "media-object img-responsive" src = "{{ u.avatar.url }}" alt = "Фотография профиля">
+                        {% else %}
+                            <img class= "media-object img-responsive" src = "{%static 'images\no_avatar.jpg'%}" alt = "Фотография профиля">
+                        {% endif %}
                     </a>
                     <div class="media-body">
                         <h1>{{ u.last_name }} {{ u.first_name }} </h1>
