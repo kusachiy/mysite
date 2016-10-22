@@ -5,17 +5,29 @@
 {% endblock %}
 
 {% block under_avatar %}
-<div class= "inputform">
-    <form enctype="multipart/form-data" class = "form-control" method="post" action="/upload_photo/">
-        {% csrf_token %}
-        <div class = "form-group">
-            <br>
-            <h3>Изменить фотографию профиля:</h3>
-            <input type="file" class="colorbutton pull-left" color="yellow" name="image" />
-            <br>
-            <br>
-            <input type="submit" class = "btn btn-success pull-left" value="Загрузить" />
-        </div>
-</form>
-</div>
+    <div class= "inputform">
+        <form enctype="multipart/form-data" class = "form-control" method="post" action="/upload_photo/">
+            {% csrf_token %}
+            <div class = "form-group">
+                <br>
+                <h3>Изменить фотографию профиля:</h3>
+                <input type="file" class="colorbutton pull-left" color="yellow" name="image" />
+                <br>
+                <br>
+                <input type="submit" class = "btn btn-success pull-left" value="Загрузить" />
+            </div>
+        </form>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div>
+        <form enctype="multipart/form-data" class = "form-control" method="post" action="/upload_photo/">
+            {% csrf_token %}
+                <input type="file" class="colorbutton pull-left" color="yellow" name="image" />
+                <input type="submit" value="Загрузить" />
+        </form>
+    </div>
 {%endblock %}

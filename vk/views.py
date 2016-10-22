@@ -1,6 +1,5 @@
 from django.http import Http404
 from django.shortcuts import render, render_to_response, redirect
-
 from vk.forms import UploadPhotoForm
 from vk.models import Person, Friends, Post
 
@@ -130,7 +129,6 @@ def logout(request):
 
 
 def upload_photo(request):
-
     if request.method == "POST":
         form = UploadPhotoForm(request.POST, request.FILES)
         if form.is_valid():
