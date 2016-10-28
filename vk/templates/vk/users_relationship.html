@@ -2,19 +2,18 @@
     {% url 'query_add_to_friends' other_p_id=profile_id as the_url %}
     {{ button_text }} = "Добавить в друзья"
     {{ caption }} = ""
-    {% if relationship == "master"%}
-        {{ caption }} = "Этот пользователь подписан на вас"
-    {%endif%}
- {%else%}
-    {% url 'query_delete_from_friends' other_p_id=profile_id as the1_url %}
-    {% if relationship == "follower"%}
-        {{ caption }} = "Вы отправили заявку в друзья этому пользователю"
-        {{ button_text }} = "Отозвать заявку"
-    {%endif%}
-    {% if relationship == "friends"%}
-        {{ caption }} = "Этот пользователь находится у вас в друзьях"
-        {{ button_text }} = "Убрать из друзей"
-    {%endif%}
+ {%elif relationship == master%}
+    {% url 'query_add_to_friends' other_p_id=profile_id as the_url %}
+    {{ button_text }} = "Добавить в друзья"
+    {{ caption }} = "Этот пользователь подписан на вас"
+ {% elif relationship == "follower"%}
+     {% url 'query_delete_from_friends' other_p_id=profile_id as the_url %}
+     {{ caption }} = "Вы отправили заявку в друзья этому пользователю"
+     {{ button_text }} = "Отозвать заявку"
+ {% elif relationship == "friends"%}
+      {% url 'query_delete_from_friends' other_p_id=profile_id as the_url %}
+      {{ caption }} = "Этот пользователь находится у вас в друзьях"
+      {{ button_text }} = "Убрать из друзей"
  {% endif%}
 <div>
     <h4>{{ caption }}</h4>
