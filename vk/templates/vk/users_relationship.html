@@ -9,7 +9,7 @@
 
  {%if status == "master"%}
     {% url 'query_add_to_friends' other_p_id=profile_id as the_url %}
-    "Этот пользователь подписан на вас"
+    <h4>Этот пользователь подписан на вас</h4>
     <div>
         <a class="button_container" href="{{the_url}}">
             <button class="btn colorbutton center-block">Одобрить заявку</button>
@@ -19,7 +19,7 @@
 
  {% if status == "follower"%}
      {% url 'query_delete_from_friends' other_p_id=profile_id as the_url %}
-     "Вы отправили заявку в друзья этому пользователю"
+     <h4>Вы отправили заявку в друзья этому пользователю</h4>
      <div>
         <a class="button_container" href="{{the_url}}">
             <button class="btn colorbutton center-block">Отозвать заявку</button>
@@ -29,7 +29,7 @@
 
  {% if status == "friends"%}
       {% url 'query_delete_from_friends' other_p_id=profile_id as the_url %}
-      "Этот пользователь находится у вас в друзьях"
+      <h4>Этот пользователь находится у вас в друзьях</h4>
       <div>
         <a class="button_container" href="{{the_url}}">
             <button class="btn colorbutton center-block">Убрать из друзей</button>

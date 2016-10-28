@@ -59,10 +59,7 @@ def profile(request, p_id):
             return render(request, 'vk/home_profile.html',
                           {'user_id': request.session['id'], 'profile_info': info, 'posts': posts})
         else:
-            if request.session['id'] > int(p_id):
-                rel = get_string_relationship(int(p_id), request.session['id'])
-            else:
-                rel = get_string_relationship(request.session['id'], int(p_id))
+            rel = get_string_relationship(request.session['id'], int(p_id))
             return render(request, 'vk/other_profile.html',
                           {'user_id': request.session['id'], 'profile_info': info,
                            'posts': posts, 'relationship': rel})
@@ -202,14 +199,20 @@ def get_relationship(first, second):
 
 
 def get_string_relationship(first, second):
-    rel = get_relationship(first,second)
+    w = 1
+    if first > second:
+        buf = first
+        first = second
+        second = buf
+        w = 2
+    rel = get_relationship(first, second)
     if rel:
-        if rel.relationship == 1:
+        if rel.relationship - w == 0:
             return "follower"
-        elif rel.relationship ==2:
-            return "master"
-        elif rel.relationship ==3:
+        elif rel.relationship == 3:
             return "friends"
+        else:
+            return "master"
     else:
         return "none"
 
