@@ -23,7 +23,7 @@ class Post(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
 
-class Friends:
+class Friends(models.Model):
     RELATIONSHIPS = (
         ('S', 'Subscriber'),
         ('F', 'Friends'),
