@@ -25,6 +25,6 @@ class Post(models.Model):
 
 class Friends(models.Model):
     id = models.AutoField(primary_key=True)
-    user1_id = models.IntegerField()
-    user2_id = models.IntegerField()
+    user1 = models.OneToOneField(Person)
+    user2 = models.OneToOneField(Person)
     relationship = models.IntegerField()

@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import render, render_to_response, redirect
 from vk.forms import UploadPhotoForm
@@ -16,7 +17,7 @@ def delete_post(request, p_id):
 
 
 def friends(request):
-    users = getfriends(request.session['id'])
+    users = get_friends(getprofileinfo(request.session['id']))
     return render_to_response('vk/user_list.html',
                               {'users': users, 'mode': 'friends', 'current_status': request.session['status']})
 
@@ -241,14 +242,13 @@ def getallusers():
     return p
 
 
-def getfriends(user_id):
-    try:
-        array = Friends.objects.filter(user1_id=user_id).values('user2_id').aggregate
-        (Friends.objects.filter(user2_id=user_id).values('user1_id'))
-    except:
-        raise Http404
+def get_friends(current_person):
+    big_array = Friends.objects.filter(Q(user1=current_person) | Q(user2_id=current_person))
+    array = big_array.filter(user1_id=current_person).values('user2')
+    array2 = big_array.filter(user2_id =current_person).values('user1')
+    for p in array2:
+        array += p
     return array
-
 
 def getposts(profile_id):
     try:
