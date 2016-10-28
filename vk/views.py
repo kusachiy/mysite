@@ -59,9 +59,13 @@ def profile(request, p_id):
             return render(request, 'vk/home_profile.html',
                           {'user_id': request.session['id'], 'profile_info': info, 'posts': posts})
         else:
+            if request.session['id'] > int(p_id):
+                rel = get_string_relationship(int(p_id), request.session['id'])
+            else:
+                rel = get_string_relationship(request.session['id'], int(p_id))
             return render(request, 'vk/other_profile.html',
                           {'user_id': request.session['id'], 'profile_info': info,
-                           'posts': posts})
+                           'posts': posts, 'relationship': rel})
     else:
         if request.session['status'] == 'guest':
             return render(request, 'vk/guest_profile.html',
@@ -94,6 +98,38 @@ def query_registration(request):
     else:
         p.save()
     return render(request, 'vk/notification.html', {'hdr': hed, 'message': message})
+
+
+def query_add_to_friends(request, other_p_id):
+    weight = 0
+    if request.session['id'] > other_p_id:
+        weight = 2
+        record = get_or_create_relationship(other_p_id,request.session['id'])
+    else:
+        weight = 1
+        record = get_or_create_relationship(request.session['id'], other_p_id)
+    r = record.relationship
+    if r == 0:
+       record.relationship = weight
+    elif r == 3 - weight:
+        record.relationship = 3
+    return redirect(request.META['HTTP_REFERER'])
+
+
+def query_delete_from_friends(request, other_p_id):
+    weight = 0
+    if request.session['id'] > other_p_id:
+        weight = 2
+        record = get_relationship(other_p_id,request.session['id'])
+    else:
+        weight = 1
+        record = get_relationship(request.session['id'], other_p_id)
+    r = record.relationship
+    if r == weight:
+       record.delete()
+    elif r == 3:
+        record.relationship = 3 - weight
+    return redirect(request.META['HTTP_REFERER'])
 
 
 def insertpost(request, w_id):
@@ -146,25 +182,34 @@ def upload_photo(request):
     return redirect(request.META['HTTP_REFERER'])
 
 
-def getrelationship(first, second):
-    array = Friends.objects.filter(user1_id=first, user2_id=second)
+def get_or_create_relationship(first, second):
+    array = Friends.objects.get(user1_id = first, user2_id = second)
     if array:
-        return -1
-    array - Friends.objects.filter(user2_id=first, user1_id=second)
-    if array:
-        return 1
-    return 0
+        return array[0]
+    else:
+        r = Friends(user1_id=first,user2_id=second, relationship=0)
+        return r
 
 
-def getstringrelationship(first, second):
-    num = getrelationship(first, second)
-    if num == -1:
-        return "Вы находитесь в подписчиках у этого пользователя"
-    elif num == 1:
-        return "Этот пользователь подал вам заявку в друзья"
-    elif num == 0:
-        return "Этот пользователь ваш друг"
-    return ""
+def get_relationship(first, second):
+    array = Friends.objects.get(user1_id=first, user2_id=second)
+    if array:
+        return array[0]
+    else:
+        return None
+
+
+def get_string_relationship(first, second):
+    rel = get_relationship(first,second)
+    if rel:
+        if rel.relationship == 1:
+            return "follower"
+        elif rel.relationship ==2:
+            return "master"
+        elif rel.relationship ==3:
+            return "friends"
+    else:
+        return "none"
 
 
 def getprofileinfo(profile_id):

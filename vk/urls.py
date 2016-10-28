@@ -17,6 +17,8 @@ urlpatterns = [
     url(r'^profile/id(?P<p_id>\d+)/$', profile, name='profile_with_id'),
     url(r'^register/$', register, name='register'),
     url(r'^upload_photo/$', upload_photo, name='upload_photo'),
+    url(r'^query_add_to_friends/$', query_add_to_friends, name='query_add_to_friends'),
+    url(r'^query_delete_from_friends/$', query_delete_from_friends, name='query_delete_from_friends'),
     url(r'^query_registration/$', query_registration, name='query_registration'),
 ]
 

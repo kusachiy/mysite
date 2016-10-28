@@ -3,3 +3,6 @@
 {% block menu %}
     {%include 'vk/user_menu.html' with status="login" parent="other" only%}
 {%endblock%}
+{% block under_avatar %}
+	{% include 'vk/users_relationship.html' with profile_id=profile_info.id status=relationship only %}
+{%endblock %}
