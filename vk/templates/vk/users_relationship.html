@@ -5,14 +5,19 @@
              <button class="btn colorbutton center-block">Добавить в друзья</button>
          </a>
      </div>
- {%elif relationship == "master"%}
+  {% endif%}
+
+ {%if relationship == "master"%}
+    {% url 'query_add_to_friends' other_p_id=profile_id as the_url %}
     "Этот пользователь подписан на вас"
     <div>
         <a class="button_container" href="{{the_url}}">
             <button class="btn colorbutton center-block">Одобрить заявку</button>
         </a>
     </div>
- {% elif relationship == "follower"%}
+  {% endif%}
+
+ {% if relationship == "follower"%}
      {% url 'query_delete_from_friends' other_p_id=profile_id as the_url %}
      "Вы отправили заявку в друзья этому пользователю"
      <div>
@@ -20,7 +25,9 @@
             <button class="btn colorbutton center-block">Отозвать заявку</button>
         </a>
     </div>
- {% elif relationship == "friends"%}
+  {% endif%}
+
+ {% if relationship == "friends"%}
       {% url 'query_delete_from_friends' other_p_id=profile_id as the_url %}
       "Этот пользователь находится у вас в друзьях"
       <div>
