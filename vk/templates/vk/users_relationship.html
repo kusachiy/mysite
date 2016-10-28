@@ -6,7 +6,7 @@
         {{ caption }} = "Этот пользователь подписан на вас"
     {%endif%}
  {%else%}
-        {% url 'query_delete_from_friends' other_p_id=profile_id as the_url %}
+    {% url 'query_delete_from_friends' other_p_id=profile_id as the_url %}
     {% if relationship == "follower"%}
         {{ caption }} = "Вы отправили заявку в друзья этому пользователю"
         {{ button_text }} = "Отозвать заявку"

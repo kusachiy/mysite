@@ -102,7 +102,7 @@ def query_registration(request):
 
 def query_add_to_friends(request, other_p_id):
     weight = 0
-    if request.session['id'] > other_p_id:
+    if request.session['id'] > int(other_p_id):
         weight = 2
         record = get_or_create_relationship(other_p_id,request.session['id'])
     else:
@@ -118,7 +118,7 @@ def query_add_to_friends(request, other_p_id):
 
 def query_delete_from_friends(request, other_p_id):
     weight = 0
-    if request.session['id'] > other_p_id:
+    if request.session['id'] > int(other_p_id):
         weight = 2
         record = get_relationship(other_p_id,request.session['id'])
     else:
