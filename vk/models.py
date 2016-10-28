@@ -23,8 +23,13 @@ class Post(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
 
-class Friends(models.Model):
+class Friends:
+    RELATIONSHIPS = (
+        ('S', 'Subscriber'),
+        ('F', 'Friends'),
+        ('M', 'Master'),
+    )
     id = models.AutoField(primary_key=True)
-    user1 = models.ForeignKey(Person)
-    user2 = models.ForeignKey(Person)
-    relationship = models.IntegerField()
+    user1_id = models.ManyToManyField(Person, related_name='first')
+    user2_id = models.ManyToManyField(Person, related_name='second')
+    relationship = models.CharField(max_length=1, choices=RELATIONSHIPS)
