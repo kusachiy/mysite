@@ -28,8 +28,9 @@ class Friends(models.Model):
         ('S', 'Subscriber'),
         ('F', 'Friends'),
         ('M', 'Master'),
+        ('N', 'Neutral'),
     )
     id = models.AutoField(primary_key=True)
-    user1_id = models.OneToOneField(Person, related_name='first')
-    user2_id = models.OneToOneField(Person, related_name='second')
+    user1 = models.OneToOneField(Person, related_name='first')
+    user2 = models.OneToOneField(Person, related_name='second')
     relationship = models.CharField(max_length=1, choices=RELATIONSHIPS)

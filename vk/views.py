@@ -17,7 +17,7 @@ def delete_post(request, p_id):
 
 
 def friends(request):
-    users = get_friends(getprofileinfo(request.session['id']))
+    users = get_friends(get_profile_info(request.session['id']))
     return render_to_response('vk/user_list.html',
                               {'users': users, 'mode': 'friends', 'current_status': request.session['status']})
 
@@ -53,7 +53,7 @@ def post(request, p_id):
 
 
 def profile(request, p_id):
-    info = getprofileinfo(p_id)
+    info = get_profile_info(p_id)
     posts = getposts(p_id)
     if request.session['status'] == 'login':
         if request.session['id'] == int(p_id):
@@ -102,10 +102,10 @@ def query_add_to_friends(request, other_p_id):
     weight = 0
     if request.session['id'] > int(other_p_id):
         weight = 2
-        record = get_or_create_relationship(other_p_id,request.session['id'])
+        record = get_or_create_relationship(get_profile_info(other_p_id),get_profile_info(request.session['id']))
     else:
         weight = 1
-        record = get_or_create_relationship(request.session['id'], other_p_id)
+        record = get_or_create_relationship(get_profile_info(request.session['id']),get_profile_info(other_p_id))
     r = record.relationship
     if r == 0:
        record.relationship = weight
@@ -119,10 +119,10 @@ def query_delete_from_friends(request, other_p_id):
     weight = 0
     if request.session['id'] > int(other_p_id):
         weight = 2
-        record = get_relationship(other_p_id,request.session['id'])
+        record = get_relationship(get_profile_info(other_p_id), get_profile_info(request.session['id']))
     else:
         weight = 1
-        record = get_relationship(request.session['id'], other_p_id)
+        record = get_relationship(get_profile_info(request.session['id']),get_profile_info(other_p_id))
     r = record.relationship
     if r == weight:
        record.delete()
@@ -132,7 +132,7 @@ def query_delete_from_friends(request, other_p_id):
 
 
 def insertpost(request, w_id):
-    a = getprofileinfo(request.session['id'])
+    a = get_profile_info(request.session['id'])
     p = Post(
         wall_id=w_id,
         author=a,
@@ -171,7 +171,7 @@ def upload_photo(request):
     if request.method == "POST":
         form = UploadPhotoForm(request.POST, request.FILES)
         if form.is_valid():
-            person = getprofileinfo(request.session['id'])
+            person = get_profile_info(request.session['id'])
             if person.avatar:
                 person.avatar.delete(save=False)
             person.avatar = form.cleaned_data["avatar"]
@@ -182,17 +182,17 @@ def upload_photo(request):
 
 
 def get_or_create_relationship(first, second):
-    array = Friends.objects.filter(user1_id=first, user2_id=second)
+    array = Friends.objects.filter(user1=first, user2=second)
     if array:
         return array[0]
     else:
-        r = Friends(user1_id=first, user2_id=second, relationship=0)
+        r = Friends(user1=first, user2=second, relationship='N')
         r.save()
         return r
 
 
 def get_relationship(first, second):
-    array = Friends.objects.filter(user1_id=first, user2_id=second)
+    array = Friends.objects.filter(user1=first, user2=second)
     if array:
         return array[0]
     else:
@@ -208,9 +208,9 @@ def get_string_relationship(first, second):
         w = 2
     rel = get_relationship(first, second)
     if rel:
-        if rel.relationship - w == 0:
+        if rel.relationship == 'S' and w == 1 or rel.relationship == 'M' and w == 2:
             return "follower"
-        elif rel.relationship == 3:
+        elif rel.relationship == 'F':
             return "friends"
         else:
             return "master"
@@ -218,7 +218,7 @@ def get_string_relationship(first, second):
         return "none"
 
 
-def getprofileinfo(profile_id):
+def get_profile_info(profile_id):
     try:
         p = Person.objects.get(id=profile_id)
     except:
