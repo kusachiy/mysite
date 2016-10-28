@@ -1,4 +1,4 @@
- {% if relationship == "none"%}
+ {% if status == "none"%}
     {% url 'query_add_to_friends' other_p_id=profile_id as the_url %}
      <div>
          <a class="button_container" href="{{the_url}}">
@@ -7,7 +7,7 @@
      </div>
   {% endif%}
 
- {%if relationship == "master"%}
+ {%if status == "master"%}
     {% url 'query_add_to_friends' other_p_id=profile_id as the_url %}
     "Этот пользователь подписан на вас"
     <div>
@@ -17,7 +17,7 @@
     </div>
   {% endif%}
 
- {% if relationship == "follower"%}
+ {% if status == "follower"%}
      {% url 'query_delete_from_friends' other_p_id=profile_id as the_url %}
      "Вы отправили заявку в друзья этому пользователю"
      <div>
@@ -27,7 +27,7 @@
     </div>
   {% endif%}
 
- {% if relationship == "friends"%}
+ {% if status == "friends"%}
       {% url 'query_delete_from_friends' other_p_id=profile_id as the_url %}
       "Этот пользователь находится у вас в друзьях"
       <div>
