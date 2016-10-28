@@ -183,11 +183,11 @@ def upload_photo(request):
 
 
 def get_or_create_relationship(first, second):
-    array = Friends.objects.filter(user1_id = first, user2_id = second)
+    array = Friends.objects.filter(user1_id=first, user2_id=second)
     if array:
         return array[0]
     else:
-        r = Friends(user1_id=first,user2_id=second, relationship=0)
+        r = Friends(user1_id=first, user2_id=second, relationship=0)
         r.save()
         return r
 
