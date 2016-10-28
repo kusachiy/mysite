@@ -183,7 +183,7 @@ def upload_photo(request):
 
 
 def get_or_create_relationship(first, second):
-    array = Friends.objects.get(user1_id = first, user2_id = second)
+    array = Friends.objects.filter(user1_id = first, user2_id = second)
     if array:
         return array[0]
     else:
@@ -192,7 +192,7 @@ def get_or_create_relationship(first, second):
 
 
 def get_relationship(first, second):
-    array = Friends.objects.get(user1_id=first, user2_id=second)
+    array = Friends.objects.filter(user1_id=first, user2_id=second)
     if array:
         return array[0]
     else:
