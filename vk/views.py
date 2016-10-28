@@ -188,6 +188,7 @@ def get_or_create_relationship(first, second):
         return array[0]
     else:
         r = Friends(user1_id=first,user2_id=second, relationship=0)
+        r.save()
         return r
 
 
