@@ -30,6 +30,6 @@ class Friends:
         ('M', 'Master'),
     )
     id = models.AutoField(primary_key=True)
-    user1_id = models.ManyToManyField(Person, related_name='first')
-    user2_id = models.ManyToManyField(Person, related_name='second')
+    user1_id = models.OneToOneField(Person, related_name='first')
+    user2_id = models.OneToOneField(Person, related_name='second')
     relationship = models.CharField(max_length=1, choices=RELATIONSHIPS)
