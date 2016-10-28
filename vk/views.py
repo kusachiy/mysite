@@ -113,6 +113,7 @@ def query_add_to_friends(request, other_p_id):
        record.relationship = weight
     elif r == 3 - weight:
         record.relationship = 3
+    record.save()
     return redirect(request.META['HTTP_REFERER'])
 
 
