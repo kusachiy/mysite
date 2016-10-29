@@ -243,9 +243,9 @@ def getallusers():
 
 
 def get_friends(current_person):
-    big_array = Friends.objects.filter(Q(user1=current_person) | Q(user2_id=current_person))
-    array = big_array.filter(user1_id=current_person).values('user2')
-    array2 = big_array.filter(user2_id=current_person).values('user1')
+    big_array = Friends.objects.filter(Q(user1=current_person, relationship=3) | Q(user2_id=current_person, relationship=3))
+    array = big_array.filter(user1=current_person).values('user2')
+    array2 = big_array.filter(user2=current_person).values('user1')
     return list(chain(array, array2))
 
 def getposts(profile_id):
