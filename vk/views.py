@@ -3,7 +3,7 @@ from django.http import Http404
 from django.shortcuts import render, render_to_response, redirect
 from vk.forms import UploadPhotoForm
 from vk.models import Person, Friends, Post
-
+from itertools import chain
 
 def allusers(request):
     users = getallusers()
@@ -245,10 +245,8 @@ def getallusers():
 def get_friends(current_person):
     big_array = Friends.objects.filter(Q(user1=current_person) | Q(user2_id=current_person))
     array = big_array.filter(user1_id=current_person).values('user2')
-    array2 = big_array.filter(user2_id =current_person).values('user1')
-    for p in array2:
-        array += p
-    return array
+    array2 = big_array.filter(user2_id=current_person).values('user1')
+    return list(chain(array, array2))
 
 def getposts(profile_id):
     try:
