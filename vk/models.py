@@ -25,12 +25,13 @@ class Post(models.Model):
 
 class Friends(models.Model):
     RELATIONSHIPS = (
-        ('S', 'Subscriber'),
-        ('F', 'Friends'),
-        ('M', 'Master'),
-        ('N', 'Neutral'),
+        ('1', 'Subscriber'),
+        ('3', 'Friends'),
+        ('2', 'Master'),
+        ('0', 'Neutral'),
     )
+
     id = models.AutoField(primary_key=True)
-    user1 = models.OneToOneField(Person, related_name='first')
-    user2 = models.OneToOneField(Person, related_name='second')
-    relationship = models.CharField(max_length=1, choices=RELATIONSHIPS)
+    user1 = models.OneToOneField(Person, related_name='user1')
+    user2 = models.OneToOneField(Person, related_name='user2')
+    relationship = models.IntegerField(max_length=1, choices=RELATIONSHIPS)

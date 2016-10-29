@@ -107,7 +107,7 @@ def query_add_to_friends(request, other_p_id):
         weight = 1
         record = get_or_create_relationship(get_profile_info(request.session['id']),get_profile_info(other_p_id))
     r = record.relationship
-    if r == 0:
+    if r == 'N':
        record.relationship = weight
     elif r == 3 - weight:
         record.relationship = 3
@@ -186,7 +186,7 @@ def get_or_create_relationship(first, second):
     if array:
         return array[0]
     else:
-        r = Friends(user1=first, user2=second, relationship='N')
+        r = Friends(user1=first, user2=second, relationship=0)
         r.save()
         return r
 
@@ -208,9 +208,9 @@ def get_string_relationship(first, second):
         w = 2
     rel = get_relationship(first, second)
     if rel:
-        if rel.relationship == 'S' and w == 1 or rel.relationship == 'M' and w == 2:
+        if rel.relationship == w:
             return "follower"
-        elif rel.relationship == 'F':
+        elif rel.relationship == 3:
             return "friends"
         else:
             return "master"
