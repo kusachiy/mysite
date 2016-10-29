@@ -107,7 +107,7 @@ def query_add_to_friends(request, other_p_id):
         weight = 1
         record = get_or_create_relationship(get_profile_info(request.session['id']),get_profile_info(other_p_id))
     r = record.relationship
-    if r == 'N':
+    if r == 0:
        record.relationship = weight
     elif r == 3 - weight:
         record.relationship = 3
