@@ -43,7 +43,7 @@ def home(request):
 
 
 def news(request):
-    posts = getposts(request.session['id'])
+    posts = get_posts(request.session['id'])
     return render_to_response('vk/news.html', {'posts': posts})
 
 
@@ -57,7 +57,7 @@ def post(request, p_id):
 
 def profile(request, p_id):
     info = get_profile_info(p_id)
-    posts = getposts(p_id)
+    posts = get_posts(p_id)
     if request.session['status'] == 'login':
         if request.session['id'] == int(p_id):
             return render(request, 'vk/home_profile.html',
