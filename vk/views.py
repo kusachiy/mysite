@@ -17,7 +17,7 @@ def delete_post(request, p_id):
 
 
 def friends(request):
-    users = get_friends(get_profile_info(request.session['id']))
+    users = get_friends(request.session['id'])
     frnds = []
     for u in users:
         frnds.append(u)
@@ -105,10 +105,10 @@ def query_add_to_friends(request, other_p_id):
     weight = 0
     if request.session['id'] > int(other_p_id):
         weight = 2
-        record = get_or_create_relationship(get_profile_info(other_p_id),get_profile_info(request.session['id']))
+        record = get_or_create_relationship(other_p_id,request.session['id'])
     else:
         weight = 1
-        record = get_or_create_relationship(get_profile_info(request.session['id']),get_profile_info(other_p_id))
+        record = get_or_create_relationship(request.session['id'],other_p_id)
     r = record.relationship
     if r == 0:
        record.relationship = weight
@@ -122,10 +122,10 @@ def query_delete_from_friends(request, other_p_id):
     weight = 0
     if request.session['id'] > int(other_p_id):
         weight = 2
-        record = get_relationship(get_profile_info(other_p_id), get_profile_info(request.session['id']))
+        record = get_relationship(other_p_id, request.session['id'])
     else:
         weight = 1
-        record = get_relationship(get_profile_info(request.session['id']),get_profile_info(other_p_id))
+        record = get_relationship(request.session['id'],other_p_id)
     r = record.relationship
     if r == weight:
        record.delete()
