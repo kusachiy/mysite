@@ -250,10 +250,10 @@ def get_friends(current_person):
     result = []
     array = big_array.filter(user1=current_person).values('user2')
     for u in array:
-        result.append(u[0])
+        result.append(u['user2'])
     array2 = list(big_array.filter(user2=current_person).values('user1'))
     for u in array2:
-        result.append(u[0])
+        result.append(u['user1'])
     return result
 
 def getposts(profile_id):
