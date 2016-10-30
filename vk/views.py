@@ -18,8 +18,11 @@ def delete_post(request, p_id):
 
 def friends(request):
     users = get_friends(get_profile_info(request.session['id']))
+    frnds = []
+    for u in users:
+        frnds.__add__(get_profile_info(u))
     return render_to_response('vk/user_list.html',
-                              {'users': users, 'mode': 'friends', 'current_status': request.session['status']})
+                              {'users': frnds, 'mode': 'friends', 'current_status': request.session['status']})
 
 
 def guest(request):
