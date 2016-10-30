@@ -20,7 +20,7 @@ def friends(request):
     users = get_friends(request.session['id'])
     frnds = []
     for u in users:
-        frnds.append(u)
+        frnds.append(get_profile_info(u))
     return render_to_response('vk/user_list.html',
                               {'users': frnds, 'mode': 'friends', 'current_status': request.session['status']})
 
