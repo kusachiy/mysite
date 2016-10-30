@@ -43,7 +43,7 @@ def home(request):
 
 
 def news(request):
-    posts = get_posts(request.session['id'])
+    posts = get_news(request.session['id'])
     return render_to_response('vk/news.html', {'posts': posts})
 
 
