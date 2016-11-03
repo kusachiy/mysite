@@ -270,9 +270,9 @@ def get_news(profile_id):
     posts = []
     for f in frnds:
         try:
-            p = Post.objects.filter(wall_id=f,author_id=f) #.order_by('-timestamp')
+            p = Post.objects.filter(wall_id=f, author_id=f) #.order_by('-timestamp')
         except:
             raise Http404
         posts.extend(p)
-    posts.sort(key=lambda x: x.timestamp, reverse=True)
+    posts.sort(lambda x: x.timestamp, reverse=True)
     return p
