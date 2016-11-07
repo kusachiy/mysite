@@ -22,6 +22,13 @@ class Post(models.Model):
     author = models.ForeignKey(Person)
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    def __cmp__(self, other):
+        if self.timestamp < other.timestamp:
+            return 1
+        elif self.timestamp > other.timestamp:
+            return -1
+        return 0
+
 
 class Friends(models.Model):
     RELATIONSHIPS = (
