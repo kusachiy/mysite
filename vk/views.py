@@ -274,5 +274,5 @@ def get_news(profile_id):
         except:
             raise Http404
         posts.extend(p)
-    posts.sort(cmp=lambda x: x.timestamp, reverse=True)
+    posts.sort(key=lambda x: x.timestamp, reverse=True)
     return posts
