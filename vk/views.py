@@ -274,6 +274,5 @@ def get_news(profile_id):
         except:
             raise Http404
         posts.extend(p)
-    posts.sort()
-
+    posts = sorted(posts)
     return p

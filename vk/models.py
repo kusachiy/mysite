@@ -21,7 +21,7 @@ class Post(models.Model):
     body = models.TextField()
     author = models.ForeignKey(Person)
     timestamp = models.DateTimeField(auto_now_add=True)
-
+    
     def __cmp__(self, other):
         if self.timestamp < other.timestamp:
             return 1
