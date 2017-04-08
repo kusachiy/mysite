@@ -32,7 +32,7 @@ def friendslist(request, p_id):
         frnds.append(get_profile_info(u))
     "if request.session['id'] == int(p_id):"
     return render(request, 'vk/user_list.html',
-                      {'users': array, 'mode': 'friends', 'current_status': request.session['status']})
+                      {'users': frnds, 'mode': 'friends', 'current_status': request.session['status']})
 
 
 def guest(request):
