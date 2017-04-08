@@ -1,11 +1,14 @@
 from django.conf.urls import url
 from vk.views import *
 
+
+
 urlpatterns = [
     url(r'^$', home, name='home'),
     url(r'^allusers/$', allusers, name='allusers'),
     url(r'^delete_post/(?P<p_id>\d+)/$', delete_post, name='delete_post'),
     url(r'^friends/$', friends, name='friends'),
+    url(r'^friendslist/id(?P<p_id>\d+)/$', friendslist, name= 'frienslist'),
     url(r'^guest/$', guest, name='guest'),
     url(r'^home/$', home, name='home'),
     url(r'^insertpost/(?P<w_id>\d+)/$', insertpost, name='insertpost'),
