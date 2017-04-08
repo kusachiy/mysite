@@ -29,7 +29,9 @@
         <section class = "col-md-14">
             <form class = "infopanel">
                 {% block profile_info %}
-                <h1 align="center">{{ profile_info.last_name}} {{ profile_info.first_name}}</h1>
+                    <h1 align="center">{{ profile_info.last_name}} {{ profile_info.first_name}}</h1>
+                    {% url 'friendslist' p_id=user_id as this_url %}
+                    <a href="{{this_url}}"><h3>Посмотреть друзей пользователя</h3></a>
                 {% endblock %}
             </form>
             {% block wall %}
