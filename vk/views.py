@@ -27,8 +27,11 @@ def friends(request):
 
 def friendslist(request, p_id):
     array = get_friends(p_id)
-    if request.session['id'] == int(p_id):
-        return render(request, 'vk/user_list.html',
+    frnds = []
+    for u in array:
+        frnds.append(get_profile_info(u))
+    "if request.session['id'] == int(p_id):"
+    return render(request, 'vk/user_list.html',
                       {'users': array, 'mode': 'friends', 'current_status': request.session['status']})
 
 
